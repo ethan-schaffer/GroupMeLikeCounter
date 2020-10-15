@@ -40,6 +40,8 @@ group = group_list[0]
 print(type(group))
 messages_to_update = list(group.messages.list_since(last_message_id))
 
+print(messages_to_update)
+
 for message in messages_to_update:
     person = message.user_id
     if not message.name == "GroupMe":
