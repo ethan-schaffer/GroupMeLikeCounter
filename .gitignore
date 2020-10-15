@@ -1,0 +1,13 @@
+
+*.iml
+*.xml
+api_token.txt
+obj/additional_data.txt
+obj/people_data.pkl
+init_info.txt
+init_info.txt
+sheet_id.txt
+token.pickle
+credentials.json
+credentials.json
+*.txt
