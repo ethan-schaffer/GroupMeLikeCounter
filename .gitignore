@@ -11,3 +11,4 @@ token.pickle
 credentials.json
 credentials.json
 *.txt
+obj/people_data.json

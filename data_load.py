@@ -1,5 +1,4 @@
 from groupy import Client
-import pickle
 import json
 
 init_data = open("init_info.txt", "r").readlines()
@@ -8,6 +7,13 @@ group_name = init_data[1]
 
 print(api_token, group_name)
 
+def save_json(obj, name):
+    with open('obj/'+ name + '.json', 'w') as f:
+        f.write(json.dumps(obj))
+
+def load_json(name):
+    with open('obj/'+ name + '.json', 'r') as f:
+        return json.loads(f.read())
 
 def save_obj(obj, name ):
     with open('obj/'+ name + '.pkl', 'wb') as f:
@@ -54,10 +60,13 @@ for message in messages:
         s.add(message.name)
         people[person] =  (people[person][0] + likes, people[person][1]+1, s)
 
+for person in people:
+    people[person] = (people[person][0], people[person][1], list(people[person][2]))
+
 print(f"Processed {len(messages)} Messages")
 print(people)
 
-save_obj(people, "people_data")
+save_json(people, "people_data")
 data_file = open("obj/additional_data.txt", 'w')
 data_file.write(group_name + "\n")
 data_file.write(json.dumps(id_to_member))

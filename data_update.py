@@ -1,6 +1,13 @@
 from groupy import Client
-import pickle
 import json
+
+def save_json(obj, name):
+    with open('obj/'+ name + '.json', 'w') as f:
+        f.write(json.dumps(obj))
+
+def load_json(name):
+    with open('obj/'+ name + '.json', 'r') as f:
+        return json.loads(f.read())
 
 def get_name_from_member_id(id, id_to_member, stats):
     if id in id_to_member:
@@ -21,7 +28,10 @@ def load_rest(name):
         json_dt = json.loads(file_text[1])
         return file_text[0].decode("utf-8")[:-1], json_dt, file_text[2], file_text[3]
 
-people = load_obj("people_data")
+people = load_json("people_data")
+for person in people:
+    people[person] = (people[person][0], people[person][1], set(people[person][2]))
+
 group_name, id_to_member, total_messages, last_message_id = load_rest("additional_data")
 
 
@@ -55,7 +65,10 @@ for message in messages_to_update:
         s.add(message.name)
         people[person] =  (people[person][0] + likes, people[person][1]+1, s)
 
-save_obj(people, "people_data")
+for person in people:
+    people[person] = (people[person][0], people[person][1], list(people[person][2]))
+
+save_json(people, "people_data")
 data_file = open("obj/additional_data.txt", 'w')
 data_file.write(group_name + "\n")
 data_file.write(json.dumps(id_to_member))
