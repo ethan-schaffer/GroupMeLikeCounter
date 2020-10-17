@@ -45,7 +45,10 @@ print(messages_to_update)
 for message in messages_to_update:
     person = message.user_id
     if not message.name == "GroupMe":
-        likes = len(message.favorited_by)
+        like_list = message.favorited_by
+        if person in like_list:
+            like_list.remove(person)
+        likes = len(like_list)
         if not person in people:
             people[person] = (0,0,set([]))
         s = people[person][2]
@@ -58,3 +61,4 @@ data_file.write(group_name + "\n")
 data_file.write(json.dumps(id_to_member))
 data_file.write("\n" + str(int(total_messages) + len(messages_to_update)))
 data_file.write("\n" + str(messages_to_update[-1].id))
+print("Saved data to files")

@@ -32,13 +32,13 @@ The first function that is run is [data_load](https://github.com/ethan-schaffer/
 
 The second function is [data_update](https://github.com/ethan-schaffer/GroupMeLikeCounter/blob/main/data_update.py), which updates the running totals of likes and counts for each user. 
 
-The final function is [data_to_google_sheet](https://github.com/ethan-schaffer/GroupMeLikeCounter/blob/main/data_to_google_sheet.py), which does what would be expected. 
+The final function is [data_to_google_sheet](https://github.com/ethan-schaffer/GroupMeLikeCounter/blob/main/data_to_google_sheet.py), which does what would be expected. The data is sent to a live google sheet.
 
 To do this, I used the Google Sheets API, along with sort functions and a map operation to best prepare the data.
 
-Future Improvements
+Additional Improvements
 ---
 
-Currently, a "like" a user awards their own message will be counted. 
+Previously, a "like" a user awarded their own message would have been counted.
 
-However, this might not be how some people want to be counted, and a potential improvement would be to ignore self-likes. 
+However, this was not an expected behavior, so it self likes are now filtered out.

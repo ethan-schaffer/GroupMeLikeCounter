@@ -44,7 +44,10 @@ people = {}
 for message in messages:
     person = message.user_id
     if not message.name == "GroupMe":
-        likes = len(message.favorited_by)
+        like_list = message.favorited_by
+        if person in like_list:
+            like_list.remove(person)
+        likes = len(like_list)
         if not person in people:
             people[person] = (0,0,set([]))
         s = people[person][2]
